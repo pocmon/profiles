@@ -1,0 +1,60 @@
+## No output to X <yes/no>
+out_to_x no
+
+## Create own window to draw <yes/no>
+own_window no
+
+## Print everything to console?
+out_to_console yes
+
+## Use double buffering (reduces flicker, not needed for console output)
+double_buffer no
+
+## Set to yes if you want Conky to be forked in the 
+background no
+
+## Update interval in seconds
+update_interval 1.0
+
+## This is the number of times Conky will update before quitting.
+## Set to zero to run forever.
+total_run_times 0
+
+## Shortens units to a single character (kiB->k,GiB->G, etc.). Default is off.
+short_units yes
+
+if_up_strictness address
+
+## Add spaces to keep things from moving about?  This only affects certain objects.
+## use_spacer should have an argument of left, right,or none
+use_spacer left
+
+## Force UTF8? note that UTF8 support required XFT
+override_utf8_locale no
+
+## number of cpu samples to average
+## set to 1 to disable averaging
+cpu_avg_samples 2
+
+# default_color FFFFFF
+
+TEXT
+${font Monospace}\
+${time %Y年%b%d日 星期%a} ${time %H:%M:%S} | \
+# ${color #FFFFFF}${weather http://weather.noaa.gov/pub/data/observations/metar/stations/ ZGSZ temperature temperature 30}°C |
+${execi 3600 wget -O $HOME/.conky/weather_raw "http://weather.sina.com.cn/shenzhen" -q}\
+${execi 3600 cat $HOME/.conky/weather_raw |grep "cnName" |cut -d "'" -f 2} \
+${execi 3600 cat $HOME/.conky/weather_raw |grep "temp :" |cut -d "'" -f 2}°C \
+${execi 3600 cat $HOME/.conky/weather_raw |grep "weatherName" |cut -d "'" -f 2} | \
+${color #EE8262}CPU ${cpu cpu0}% \
+${color #CD950C}${cpu cpu1}% \
+${color #228B22}${cpu cpu2}% \
+${color #00FF00}${cpu cpu3}% | \
+${color #00FF00}WLAN ${downspeed wlan0}/${upspeed wlan0} | \
+${color #FFFFFF}${uptime_short} | \
+${color #FFFFFF}MEM ${memperc}% \
+${color #FFFFFF}SWAP ${swapperc}% | \
+# ${color #FFFFFF}HOME ${fs_used_perc /home}% | \ 
+# ${color #FFFFFF}PROC ${processes} \
+# ${color #FFFFFF}RUN ${running_processes} | 
+${color #FFFFFF}${battery_short}-${battery_time} |
