@@ -1,0 +1,12 @@
+#
+#--------------------------------------------------------
+#  Name:	${NAME}.py
+#  Created:	${DATE} pocmon
+#  Edition:	Python3.4, pychrom
+#  License:	MIT <http://opensource.org/licenses/MIT>
+#  Copyright:	(c) pocmon <pocmon@sina.com>
+#--------------------------------------------------------
+#  **Note: ...
+#  **Warning: ...
+#--------------------------------------------------------
+#
