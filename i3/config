@@ -44,8 +44,10 @@ bindsym $mod+Shift+Return exec xterm
 bindsym $mod+q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run -fn "$ft" -nb "$back" -nf "$white" -sb "$yellow" -sf "$black"
-bindsym $mod+Shift+d exec gksudo dmenu_run -fn "$ft" -nb "$back" -nf "$white" -sb "$yellow" -sf "$black"
+# bindsym $mod+d exec dmenu_run -fn "$ft" -nb "$back" -nf "$white" -sb "$yellow" -sf "$black"
+bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+# bindsym $mod+Shift+d exec gksudo dmenu_run -fn "$ft" -nb "$back" -nf "$white" -sb "$yellow" -sf "$black"
+bindsym $mod+Shift+d exec --no-startup-id gksudo i3-dmenu-desktop
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
@@ -220,49 +222,62 @@ bindsym $mod+z exec pcmanfm
 # 邮件
 bindsym $mod+m exec thunderbird
 
-# 聊天类应用
-mode "Win+Ctrl+c: c-irc q-qq s-skype d-xware" {
+# 网络类应用
+mode "Win+Ctrl+n: c-irc q-qq s-skype b-bcloud d-xware" {
         bindsym q mode "default" exec wine-qqintl
 	bindsym c mode "default" exec xchat
 	bindsym d mode "default" exec xware-desktop
 	bindsym s mode "default" exec skype
+	bindsym b mode "default" exec bcloud-gui
 
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }
-bindsym $mod+Control+c mode "Win+Ctrl+c: c-irc q-qq s-skype d-xware"
+bindsym $mod+Control+n mode "Win+Ctrl+n: c-irc q-qq s-skype b-bcloud d-xware"
 
-# 通用类应用
-mode "Win+Ctrl+p: f-files d-dict e-edit w-doc t-xls p-ppt i-freemind s-scribus j-jstock v-virtualbox" {
-	bindsym d mode "default" exec goldendict
-	bindsym e mode "default" exec gedit 
+# 办公类应用
+mode "Win+Ctrl+o: r-retext w-doc e-et p-ppt x-xmind f-freemind s-scribus l-libreoffice" {
+	bindsym r mode "default" exec retext 
 	bindsym w mode "default" exec wps
 	bindsym p mode "default" exec wpp
-	bindsym t mode "default" exec et
-	bindsym f mode "default" exec doublecmd
-	bindsym i mode "default" exec freemind
-	bindsym j mode "default" exec /home/pocmon/jstock/jstock.sh
-	bindsym v mode "default" exec virtualbox
+	bindsym e mode "default" exec et
+	bindsym x mode "default" exec XMind
+	bindsym f mode "default" exec freemind
 	bindsym s mode "default" exec scribus
+	bindsym l mode "default" exec libreoffice
 
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }
-bindsym $mod+Control+p mode "Win+Ctrl+p: f-files d-dict e-edit w-doc t-xls p-ppt i-freemind s-scribus j-jstock v-virtualbox"
+bindsym $mod+Control+o mode "Win+Ctrl+o: r-retext w-doc e-et p-ppt x-xmind f-freemind s-scribus l-libreoffice"
+
+
+# 本地通用类应用
+mode "Win+Ctrl+p: d-dict e-gedit j-jstock v-virtualbox f-doublecmd" {
+	bindsym d mode "default" exec goldendict
+	bindsym e mode "default" exec gedit
+	bindsym f mode "default" exec doublecmd
+	bindsym j mode "default" exec /home/pocmon/jstock/jstock.sh
+	bindsym v mode "default" exec virtualbox
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+bindsym $mod+Control+p mode "Win+Ctrl+p: d-dict e-gedit j-jstock v-virtualbox f-doublecmd"
 
 # 图片、影像类应用
-mode "Win+Ctrl+m: g-gimp d-dia s-shotwell r-rawtherapee p-mypaint m-pitivi" {	
+mode "Win+Ctrl+m: g-gimp d-dia s-shotwell r-rawtherapee p-mypaint l-lightworks" {	
 	bindsym p mode "default" exec mypaint
 	bindsym d mode "default" exec dia
 	bindsym g mode "default" exec gimp
 	bindsym s mode "default" exec shotwell
 	bindsym r mode "default" exec rawtherapee
-        bindsym m mode "default" exec pitivi
+        bindsym l mode "default" exec lightworks
 
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }
-bindsym $mod+Control+m mode "Win+Ctrl+m: g-gimp d-dia s-shotwell r-rawtherapee p-mypaint m-pitivi"
+bindsym $mod+Control+m mode "Win+Ctrl+m: g-gimp d-dia s-shotwell r-rawtherapee p-mypaint l-lightworks"
 
 # 系统类应用
 mode "Win+Ctrl+s: u-update p-parted c-software_center l-lampp" {
@@ -290,14 +305,16 @@ mode "Win+Ctrl+b: g-geany r-rstudio e-eclipse w-webstorm c-VSC p-pycharm" {
 }
 bindsym $mod+Control+b mode "Win+Ctrl+b: g-geany r-rstudio e-eclipse w-webstorm c-VSC p-pycharm"
 
-# 游戏类应用
-mode "Win+Ctrl+g: r-openRA" {
+# 娱乐、游戏类应用
+mode "Win+Ctrl+g: a-deepinmusic m-moonplayer r-openRA" {
+	bindsym m mode "default" exec moonplayer
         bindsym r mode "default" exec openra
+	bindsym a mode "default" exec deepin-music-player
 
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }
-bindsym $mod+Control+g mode "Win+Ctrl+g: r-openRA"
+bindsym $mod+Control+g mode "Win+Ctrl+g: a-deepinmusic m-moonplayer r-openRA"
 
 # 锁屏、注销、休眠、睡眠、重启、关机
 set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
