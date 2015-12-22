@@ -236,8 +236,8 @@ mode "Win+Ctrl+n: c-irc q-qq s-skype b-bcloud d-xware" {
 bindsym $mod+Control+n mode "Win+Ctrl+n: c-irc q-qq s-skype b-bcloud d-xware"
 
 # 办公类应用
-mode "Win+Ctrl+o: r-retext w-doc e-et p-ppt x-xmind f-freemind s-scribus l-libreoffice" {
-	bindsym r mode "default" exec retext 
+mode "Win+Ctrl+o: h-haroopad w-doc e-et p-ppt x-xmind f-freemind s-scribus l-libreoffice" {
+	bindsym h mode "default" exec haroopad 
 	bindsym w mode "default" exec wps
 	bindsym p mode "default" exec wpp
 	bindsym e mode "default" exec et
@@ -249,7 +249,7 @@ mode "Win+Ctrl+o: r-retext w-doc e-et p-ppt x-xmind f-freemind s-scribus l-libre
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }
-bindsym $mod+Control+o mode "Win+Ctrl+o: r-retext w-doc e-et p-ppt x-xmind f-freemind s-scribus l-libreoffice"
+bindsym $mod+Control+o mode "Win+Ctrl+o: h-haroopad w-doc e-et p-ppt x-xmind f-freemind s-scribus l-libreoffice"
 
 
 # 本地通用类应用
